@@ -27,7 +27,6 @@ Route::get('/clients/{id}', [Clients::class, 'show']);
 Route::get('/clients/search/{name}', [Clients::class, 'search']);
 
 
-
 // Unauthorized
 Route::get('login', function(){
     return "You need to auth!";
@@ -40,10 +39,4 @@ Route::group( ['middleware' => ['auth:sanctum']], function(){
     Route::delete('/clients/{id}', [Clients::class, 'destroy'] );
     Route::post('/logout', [AuthController::class, 'logout'] );
 
-});
-
-
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
 });
