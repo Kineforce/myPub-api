@@ -22,8 +22,6 @@ use Illuminate\Support\Facades\Auth;
 // Public Routes
 Route::post('/register', [AuthController::class, 'register'] );
 Route::post('/login', [AuthController::class, 'login'] );
-Route::get('/clients/{id}', [Clients::class, 'show']);
-Route::get('/clients/search/{name}', [Clients::class, 'search']);
 
 
 // Unauthorized
@@ -33,6 +31,8 @@ Route::get('login', function(){
 
 // Protected Routes
 Route::group( ['middleware' => ['auth:sanctum']], function(){
+    Route::get('/clients/{id}', [Clients::class, 'show']);
+    Route::get('/clients/search/{name}', [Clients::class, 'search']);
     Route::get('/clients', [Clients::class, 'index'] );
     Route::post('/clients', [Clients::class, 'store'] );
     Route::put('/clients/{id}', [Clients::class, 'update'] );

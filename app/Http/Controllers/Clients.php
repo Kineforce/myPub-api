@@ -77,6 +77,7 @@ class Clients extends Controller
      */
     public function search($name)
     {
+
         return Client::where('name', 'like', "%".$name."%")->get();
     }
 }
