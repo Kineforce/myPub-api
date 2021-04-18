@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function register(Request $request){
         $fields = $request->validate([
-            'username' => 'required|string',
+            'username' => 'required|string|unique:users,username',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed'
         ]);
@@ -36,7 +36,7 @@ class AuthController extends Controller
     public function login(Request $request){
         $fields = $request->validate([
             'username' => 'required|string',
-            'password' => 'required|string|confirmed'
+            'password' => 'required|string'
         ]);
 
         // Check username
