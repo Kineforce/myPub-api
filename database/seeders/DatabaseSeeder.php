@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $gender = ['m', 'f'];
 
-        for ($i = 0; $i < 500; $i++){
+        for ($i = 0; $i < 200; $i++){
             Client::create([
                 "name" => $faker->name,
                 "cpf" => "123.123.123.12",  
