@@ -20,6 +20,7 @@ class CreateClientsTable extends Migration
             $table->string('gender')->nullable();
             $table->string('phone_number');
             $table->string('adress')->nullable();
+            $table->integer('show_search');
             $table->timestamps();
         });
     }

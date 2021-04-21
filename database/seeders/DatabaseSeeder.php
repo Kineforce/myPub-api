@@ -23,13 +23,14 @@ class DatabaseSeeder extends Seeder
 
         $gender = ['m', 'f'];
 
-        for ($i = 0; $i < 200; $i++){
+        for ($i = 0; $i < 10000; $i++){
             Client::create([
                 "name" => $faker->name,
                 "cpf" => "123.123.123.12",  
                 "gender" => $gender[array_rand([1, 2])],
                 "phone_number" => $faker->phoneNumber,
                 "adress" => $faker->address,
+                "show_search" => 1
             ]);
         }
 
