@@ -15,7 +15,7 @@ class Actions extends Controller
     public function index($id)
     {
  
-        return Action::where('client_id', 'ilike', "%".$id."%")->get();
+        return Action::where('client_id', 'ilike', "%".$id."%")->orderBy('id')->get();
 
     }
 
@@ -27,8 +27,12 @@ class Actions extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'client_id' => 'required',
+            'action'    => 'required',
+        ]);
+
+        return Action::create($request->all());    }
 
     /**
      * Display the specified resource.
@@ -50,7 +54,9 @@ class Actions extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = Action::find($id);
+        $client->update($request->all());
+        return $client;
     }
 
     /**
@@ -61,6 +67,6 @@ class Actions extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Action::destroy($id);
     }
 }

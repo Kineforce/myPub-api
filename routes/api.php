@@ -32,14 +32,24 @@ Route::get('login', function(){
 
 // Protected Routes
 Route::group( ['middleware' => ['auth:sanctum']], function(){
+
+    // Clients
+
     Route::get('/clients/all', [Clients::class, 'index'] );
     Route::get('/clients/{id}', [Clients::class, 'show']);
     Route::get('/clients/search/{name}', [Clients::class, 'search']);
-    Route::get('/clients/addAction/{id}', [Actions::class, 'index'] );
     Route::post('/clients', [Clients::class, 'store'] );
     Route::put('/clients/{id}', [Clients::class, 'update'] );
     Route::delete('/clients/{id}', [Clients::class, 'destroy'] );
     Route::post('/logout', [AuthController::class, 'logout'] );
+
+
+    // Actions
+
+    Route::get('/clients/getAction/{id}', [Actions::class, 'index'] );
+    Route::post('/clients/addAction/', [Actions::class, 'store'] );
+    Route::delete('/clients/delAction/{id}', [Actions::class, 'destroy']);
+    Route::put('/clients/updateAction/{id}', [Actions::class, 'update']);
 
 });
 
