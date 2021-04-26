@@ -17,6 +17,8 @@ class CreateActionsTable extends Migration
             $table->id();
             $table->string("client_id");
             $table->string("action");
+            $table->string("product");
+            $table->integer("price");            
             $table->timestamps();
         });
     }

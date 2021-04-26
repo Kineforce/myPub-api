@@ -15,7 +15,19 @@ class Actions extends Controller
     public function index($id)
     {
  
-        return Action::where('client_id', 'ilike', "%".$id."%")->orderBy('id')->get();
+        $results =  Action::where('client_id', 'ilike', "%".$id."%")->orderBy('id')->get();
+        $new_results = [];
+
+        foreach($results as $result){
+            $result->formated_date = [
+                'date' => date('d-m-Y', strtotime($result->created_at)),
+                'hour' => date('H:i', strtotime($result->created_at))
+            ];
+            array_push($new_results, $result);
+        };
+
+
+        return $new_results;
 
     }
 
@@ -30,9 +42,12 @@ class Actions extends Controller
         $request->validate([
             'client_id' => 'required',
             'action'    => 'required',
+            'product'   => 'required',
+            'price'     => 'required'
         ]);
 
-        return Action::create($request->all());    }
+        return Action::create($request->all());    
+    }
 
     /**
      * Display the specified resource.

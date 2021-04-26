@@ -11,7 +11,8 @@ class Action extends Model
 
     protected $fillable = [
         "client_id",
+        "price",
         "action",
-        
+        "product"
     ];
 }
