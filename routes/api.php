@@ -46,6 +46,7 @@ Route::group( ['middleware' => ['auth:sanctum']], function(){
 
     // Actions
 
+    Route::get('/clients/getReport/{ano}/{month}/{client}', [Actions::class, 'getReport'] );
     Route::get('/clients/getAction/{id}', [Actions::class, 'index'] );
     Route::post('/clients/addAction/', [Actions::class, 'store'] );
     Route::delete('/clients/delAction/{id}', [Actions::class, 'destroy']);

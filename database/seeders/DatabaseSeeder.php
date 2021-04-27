@@ -20,30 +20,40 @@ class DatabaseSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
         
-        // \App\Models\User::factory(10)->create();
         // Client::truncate();
 
         // $gender = ['m', 'f'];
 
-        // for ($i = 0; $i < 1000; $i++){
+        // for ($i = 0; $i < 10; $i++){
         //     Client::create([    
         //         "name" => $faker->name,
         //         "cpf" => "123.123.123.12",  
         //         "gender" => $gender[array_rand([1, 2])],
         //         "phone_number" => $faker->phoneNumber,
         //         "adress" => $faker->address,
-        //         "show_search" => 1
         //     ]);
         // }
 
-        Action::truncate();
+        // Action::truncate();
+
+        $action = ['Pagou', 'Deveu'];
+        $products = ['Frango assado', 'Jantinha', 'Cerveja', 'Pinga', 'Balinha', 'Jantinha (só feijão)', 'Jantinha (só mandioca)'
+        ,'Jantinha (só macarrão)', 'Churrasco'];
         
         for ($i = 0; $i< 10; $i++){
-            Action::create([
-                "client_id" => "1",
-                "action" => $faker->catchPhrase
-            ]);
-        }
+            for($j = 0; $j < 20; $j++){
+                Action::create([
+                    "client_id" => $i,
+                    "action" => $action[array_rand([1, 2])],
+                    "product" => $products[array_rand([1, 9])] ,
+                    "price" => rand(0, 99),
+                    "created_at" => strtotime('-4 year', time())
+                ]);
+                echo "Outer loop --> $i \n ";
+                echo "Inner loop --> $j \n ";
+
+            };
+        };
 
 
     }
