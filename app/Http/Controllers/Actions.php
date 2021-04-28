@@ -101,37 +101,74 @@ class Actions extends Controller
         $results = [];
         $years = [];
 
-        if ($year == "0" && $month == "0" && $client_name != "0"){
+        if ( $year == "empty" && $client_name == "empty"){
+
+            $results =  DB::select("    SELECT     *
+            FROM       ACTIONS
+            ORDER BY   EXTRACT(YEAR FROM CREATED_AT) ");
+
+            $years = DB::select( "  SELECT DISTINCT( EXTRACT(YEAR FROM CREATED_AT))
+            FROM ACTIONS 
+            ORDER BY EXTRACT(YEAR FROM CREATED_AT) ");
+
+        }
+
+        if ( $year == "empty" && $client_name != "empty"){
 
             $client_id = Client::where('name', 'ilike', "%".$client_name."%")->get();
 
             if (count($client_id) > 0){
-                $results =  Action::where('client_id', 'ilike', "%".$client_id[0]->id."%")->get();
+                $results =  DB::select("    SELECT      *
+                                            FROM        ACTIONS
+                                            WHERE       CLIENT_ID = '".$client_id[0]->id."'
+                                            ORDER BY    EXTRACT(YEAR FROM CREATED_AT) ");
+
+                $years = DB::select( "  SELECT DISTINCT( EXTRACT(YEAR FROM CREATED_AT))
+                                        FROM    ACTIONS 
+                                        WHERE   CLIENT_ID = '".$client_id[0]->id."'
+                                        ORDER BY EXTRACT(YEAR FROM CREATED_AT) ");
             }
+           
+            
+        }
 
-        } 
-        
-        if ( $year == "0" && $month == "0"  && $client_name == "0" ){
+        if ( $year != "empty" && $client_name == "empty"){
 
-            $results =  DB::select(" SELECT     *
-                                     FROM       ACTIONS
-                                     ORDER BY   EXTRACT(YEAR FROM CREATED_AT) ");
+            $results =  DB::select("    SELECT     *
+                                        FROM       ACTIONS
+                                        WHERE      EXTRACT(YEAR FROM CREATED_AT) = '".$year."'
+                                        ORDER BY   EXTRACT(YEAR FROM CREATED_AT) ");
 
             $years = DB::select( "  SELECT DISTINCT( EXTRACT(YEAR FROM CREATED_AT))
-                                    FROM ACTIONS ORDER BY EXTRACT(YEAR FROM CREATED_AT) ");
+                                    FROM        ACTIONS 
+                                    WHERE       EXTRACT(YEAR FROM CREATED_AT) = '".$year."'
+                                    ORDER BY    EXTRACT(YEAR FROM CREATED_AT) ");
+            
+        }
 
+        if ( $year != "empty" && $client_name != "empty"){
+
+            $client_id = Client::where('name', 'ilike', "%".$client_name."%")->get();
+
+            if (count($client_id) > 0){
+                $results =  DB::select("    SELECT      *
+                                            FROM        ACTIONS
+                                            WHERE       CLIENT_ID = '".$client_id[0]->id."'
+                                            AND         EXTRACT(YEAR FROM CREATED_AT) = '".$year."'
+                                            ORDER BY    EXTRACT(YEAR FROM CREATED_AT) ");
+
+                $years = DB::select( "  SELECT DISTINCT( EXTRACT(YEAR FROM CREATED_AT))
+                                        FROM    ACTIONS 
+                                        WHERE   CLIENT_ID = '".$client_id[0]->id."'
+                                        AND     EXTRACT(YEAR FROM CREATED_AT) = '".$year."'
+                                        ORDER BY EXTRACT(YEAR FROM CREATED_AT) ");
+            }
            
-
+            
         }
 
-        if ( $year != "0" && $month == "0" && $client_name == "0"){
 
-            $results = DB::select(" SELECT  * 
-                                    FROM    ACTIONS
-                                    WHERE   EXTRACT(YEAR FROM CREATED_AT) = ? ", [$year]);
-
-        }
-        
+     
         return [$results, $years];
 
     }
