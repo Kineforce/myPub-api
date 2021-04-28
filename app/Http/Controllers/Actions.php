@@ -164,10 +164,7 @@ class Actions extends Controller
                                         ORDER BY EXTRACT(YEAR FROM CREATED_AT) ");
             }
            
-            
         }
-
-
      
         return [$results, $years];
 
