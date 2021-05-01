@@ -53,7 +53,7 @@ return [
     */
 
     //'url' => env('APP_URL', 'https://mypub-webmanager-api.herokuapp.com'),
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://localhost'),
     //https://mypub-webmanager-api.herokuapp.com/api/register
 
     'asset_url' => env('ASSET_URL', null),
