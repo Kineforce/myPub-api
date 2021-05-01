@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/teste', function(){
+    return ["error" => "Unknown route!"];
+});
+
 
 // Public Routes
 Route::post('/register', [AuthController::class, 'register'] );
@@ -54,6 +58,3 @@ Route::group( ['middleware' => ['auth:sanctum']], function(){
 
 });
 
-Route::get('/', function(){
-    return ["error" => "Unknown route!"];
-});
