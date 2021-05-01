@@ -20,27 +20,27 @@ class DatabaseSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
         
-        // Client::truncate();
+        Client::truncate();
 
-        // $gender = ['m', 'f'];
+        $gender = ['m', 'f'];
 
-        // for ($i = 0; $i < 10; $i++){
-        //     Client::create([    
-        //         "name" => $faker->name,
-        //         "cpf" => "123.123.123.12",  
-        //         "gender" => $gender[array_rand([1, 2])],
-        //         "phone_number" => $faker->phoneNumber,
-        //         "adress" => $faker->address,
-        //     ]);
-        // }
+        for ($i = 0; $i < 50; $i++){
+            Client::create([    
+                "name" => $faker->name,
+                "cpf" => "123.123.123.12",  
+                "gender" => $gender[array_rand([1, 2])],
+                "phone_number" => $faker->phoneNumber,
+                "adress" => $faker->address,
+            ]);
+        }
 
-        // Action::truncate();
+        Action::truncate();
 
         $action = ['Pagou', 'Deveu'];
         $products = ['Frango assado', 'Jantinha', 'Cerveja', 'Pinga', 'Balinha', 'Jantinha (só feijão)', 'Jantinha (só mandioca)'
         ,'Jantinha (só macarrão)', 'Churrasco'];
         
-        for ($i = 0; $i< 10; $i++){
+        for ($i = 0; $i< 50; $i++){
             for($j = 0; $j < 20; $j++){
                 Action::create([
                     "client_id" => $i,
