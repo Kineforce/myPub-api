@@ -2,7 +2,7 @@ APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:DtoHMApaeIZsih9fXt6UkuiHRytEA37s9viTC5XrVVU=
 APP_DEBUG=true
-APP_URL=http://localhost
+APP_URL=https://mypub-webmanager-api.herokuapp.com
 
 LOG_CHANNEL=stack
 LOG_LEVEL=debug
