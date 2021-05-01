@@ -21,7 +21,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['mypub-webmanager.herokuapp.com'],
+    'allowed_origins' => ['https://mypub-webmanager.herokuapp.com'],
 
     //'allowed_origins' => ['*'],
 
